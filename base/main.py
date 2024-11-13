@@ -70,6 +70,6 @@ def read_input(filename: str) -> tuple[KnowledgeBase, str]:
     return parse(knowledge), query
 
 def main():
-    kb, query = read_input('KB')
+    kb, query = read_input('./tests/test_10')
     print(truth_table(kb,query))
 main()
