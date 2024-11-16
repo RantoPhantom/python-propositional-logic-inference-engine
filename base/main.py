@@ -1,14 +1,29 @@
 from itertools import product
 class KnowledgeBase:
     def __init__(self, rules: list[tuple | str], facts: list[str]):
-        self.rules = rules
         self.facts = facts
+        self.rules = rules
 
 def evaluate(clause, values) -> bool:
     premise, conclusion = clause
     if all(values[var] for var in premise):
         return values[conclusion]
     return True 
+
+def forward_chaining(kb: KnowledgeBase, query: str) -> bool:
+    inferred = set(kb.facts)
+    new_inference = True
+
+    while new_inference:
+        new_inference = False
+        for premises, conclusion in kb.rules:
+            if all(p in inferred for p in premises) and conclusion not in inferred:
+                inferred.add(conclusion)
+                new_inference = True
+
+                if query in inferred:
+                    return True
+    return False
 
 def truth_table(kb: KnowledgeBase, query: str ) -> bool:
     # abusing python's set dedupe nature
@@ -19,8 +34,8 @@ def truth_table(kb: KnowledgeBase, query: str ) -> bool:
 
     if query not in atoms:
         raise ValueError("query not in atoms, cannot eval")
+
     # make all possible combinations of 1s and 0s of the atoms
-    
     atoms = list(atoms)
     all_combinations = product([True, False], repeat=len(atoms))
     for combination in all_combinations:
@@ -70,6 +85,6 @@ def read_input(filename: str) -> tuple[KnowledgeBase, str]:
     return parse(knowledge), query
 
 def main():
-    kb, query = read_input('./tests/test_10')
-    print(truth_table(kb,query))
+    kb, query = read_input('KB')
+    print(forward_chaining(kb,query))
 main()
