@@ -15,7 +15,7 @@ def truth_table(kb: KnowledgeBase, query: str ) -> bool:
         atoms.add(conclusion)
 
     if query not in atoms:
-        raise ValueError("query not in atoms, cannot eval")
+        return False
 
     # make all possible combinations of 1s and 0s of the atoms
     atoms = list(atoms)

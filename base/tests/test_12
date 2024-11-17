@@ -1,4 +1,5 @@
 TELL
-a => b; ~a => c; b & c => d; a;
+x & y => z; z & w => q; x; y;
 ASK
-d
+q
+false
