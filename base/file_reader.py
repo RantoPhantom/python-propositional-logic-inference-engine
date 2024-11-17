@@ -9,6 +9,7 @@ def parse(knowledge: list[str]) -> KnowledgeBase:
             continue
         substring = tuple(s.split("=>"))
         lol = substring[0].strip().split("&")
+        lol = [s.strip() for s in lol]
         rules.append((lol,substring[1].strip()))
     return KnowledgeBase(rules, facts)
 
