@@ -3,6 +3,8 @@ from kb import KnowledgeBase
 def forward_chaining(kb: KnowledgeBase, query: str) -> bool:
     inferred = set(kb.facts)
     new_inference = True
+    if query in inferred:
+        return True
     while new_inference:
         new_inference = False
         for premises, conclusion in kb.rules:
@@ -12,4 +14,3 @@ def forward_chaining(kb: KnowledgeBase, query: str) -> bool:
                 if query in inferred:
                     return True
     return False
-
