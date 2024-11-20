@@ -20,7 +20,8 @@ def main():
         exit(1)
     kb, query = read_input(file_path)
     out = methods[method_input](kb,query)
-    msg = "YES" if out[0] == True else "NO"
-    msg += f": {out[1]}"
+    msg = "Yes" if out[0] == True else "No"
+    msg += ": "
+    msg += "" if out[1] == set() or out[1] == 0 else str(out[1])
     print(msg)
 main()
