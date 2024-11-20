@@ -19,5 +19,8 @@ def main():
         print(f"The method provided is unknown/not implemented: {sys.argv[2]}")
         exit(1)
     kb, query = read_input(file_path)
-    print(methods[method_input](kb,query))
+    out = methods[method_input](kb,query)
+    msg = "Yes" if out[0] == True else "No"
+    msg += f": {out[1]}"
+    print(msg)
 main()

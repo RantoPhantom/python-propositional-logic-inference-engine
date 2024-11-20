@@ -7,15 +7,16 @@ def evaluate(clause, values) -> bool:
         return values[conclusion]
     return True 
 
-def truth_table(kb: KnowledgeBase, query: str ) -> bool:
+def truth_table(kb: KnowledgeBase, query: str ) -> tuple[bool, int]:
     # abusing python's set dedupe nature
+    num_models: int = 0
     atoms = set(kb.facts)
     for premises, conclusion in kb.rules:
         atoms.update(premises)
         atoms.add(conclusion)
 
     if query not in atoms:
-        return False
+        return False, 0
 
     # make all possible combinations of 1s and 0s of the atoms
     atoms = list(atoms)
@@ -28,7 +29,8 @@ def truth_table(kb: KnowledgeBase, query: str ) -> bool:
             # if not all facts are true then continue til it is 
             continue
         if all(evaluate(rule, values) for rule in kb.rules):
+            num_models += 1
             if not values[query]:
-                return False
-    return True
+                return False, num_models
+    return True, num_models
 
