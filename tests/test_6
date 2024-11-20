@@ -2,4 +2,3 @@ TELL
 j => k; l => m; k&m => n; j; l;
 ASK
 n
-true

@@ -2,4 +2,3 @@ TELL
 x & y => z; z & w => q; x; y;
 ASK
 q
-false

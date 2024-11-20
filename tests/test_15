@@ -2,4 +2,3 @@ TELL
 x => y; a & b => c; d => e; x;
 ASK
 c
-false

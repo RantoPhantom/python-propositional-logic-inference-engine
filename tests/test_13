@@ -2,4 +2,3 @@ TELL
 a & b => c; c & d => e; e & f => g; g => h; a; b; d; f;
 ASK
 h
-true
